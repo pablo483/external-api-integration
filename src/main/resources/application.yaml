@@ -12,6 +12,8 @@ server:
 spring:
   application:
     name: integration-service
+  config:
+    import: optional:classpath:application-local.properties
 
   # ==========================================
   # KAFKA CONFIGURATION
@@ -102,11 +104,12 @@ webclient:
     base-url: https://api.openweathermap.org/data/2.5
     timeout: 5000
     api:
-      key: ${WEATHER_API_KEY}
-  
-#  currency:
-#    base-url: https://api.exchangerate.host
-#    timeout: 3000
+      key: ${WEATHER_API_KEY:}
+  currency:
+    base-url: https://api.apilayer.com
+    timeout: 3000
+    api:
+      key: ${CURRENCY_API_KEY:}
 
 # ==========================================
 # LOGGING CONFIGURATION
@@ -139,3 +142,15 @@ management:
       enabled: true
     kafka:
       enabled: true
+# ==========================================
+# Sprin g DOC(Swagger UI )
+# ==========================================
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+  paths-to-match: /api/**     # only document your APIs, hide actuator endpoints

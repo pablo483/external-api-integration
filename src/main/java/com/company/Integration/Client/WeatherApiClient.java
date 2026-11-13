@@ -15,7 +15,7 @@ import java.time.Duration;
 @Slf4j
 public class WeatherApiClient {
 
-    @Value("${weather.api.key}")
+    @Value("${webclient.weather.api.key}")
     private String apiKey;
 
     @Autowired

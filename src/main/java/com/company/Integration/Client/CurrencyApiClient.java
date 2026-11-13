@@ -4,6 +4,7 @@ import com.company.Integration.DTO.CurrencyResponse;
 import com.company.Integration.Exception.ExternalApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -13,6 +14,9 @@ import java.time.Duration;
 @Component
 @Slf4j
 public class CurrencyApiClient {
+
+    @Value("${webclient.currency.api.key}")
+    private String apiKey;
 
     @Autowired
     private WebClient webClient;
@@ -27,7 +31,7 @@ public class CurrencyApiClient {
                         .path("/currency_data/live")
                         .queryParam("source", base)
                         .queryParam("currencies", symbols) // e.g., "EUR,GBP"
-                        .queryParam("apikey", "TDcAPLIgKKb4ECah59tMtAwzpiE3BEFT")    // Your new API Key
+                        .queryParam("apikey", apiKey)
                         .build()
                 )
 
